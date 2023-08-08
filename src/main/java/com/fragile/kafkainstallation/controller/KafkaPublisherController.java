@@ -20,7 +20,9 @@ public class KafkaPublisherController {
     @PostMapping("/publish/{message}")
     public ResponseEntity<?> publishMessage(@PathVariable("message") String message) {
         try {
-            publisher.sendMessageToTopic(message);
+            for(int i = 0; i<=100000; i++){
+                publisher.sendMessageToTopic(message  + i);
+            }
             return ResponseEntity.ok("Message sent successfully");
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
